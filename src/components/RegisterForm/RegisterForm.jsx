@@ -78,8 +78,9 @@ export default function RegisterForm({ onSubmit }) {
         </button>
       </div>
       <button type="submit" className={css.btn}>
-        Sign up
+        Register
       </button>
+      <a className={css.link}>Login</a>
     </form>
   );
 }
