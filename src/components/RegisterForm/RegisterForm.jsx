@@ -3,17 +3,32 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/auth/operations";
+import { toast } from "react-toastify";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
-    .min(6, "Minimum 6 characters")
+    .matches(
+      /^[A-Za-z]{6}\d$/,
+      "Password must be 6 letters followed by 1 number"
+    )
     .required("Password is required"),
 });
 
-export default function RegisterForm({ onSubmit }) {
+export default function RegisterForm() {
+  const dispatch = useDispatch();
+
+  const onError = (formErrors) => {
+    const messages = Object.values(formErrors).map((err) => err.message);
+    messages.forEach((msg) => toast.error(msg));
+  };
+
+  const { loading, error } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
@@ -25,25 +40,26 @@ export default function RegisterForm({ onSubmit }) {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePassword = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const togglePassword = () => setShowPassword((p) => !p);
 
   const handleFormSubmit = (data) => {
-    if (onSubmit) onSubmit(data);
+    dispatch(registerUser(data));
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form
+      className={css.form}
+      onSubmit={handleSubmit(handleFormSubmit, onError)}
+    >
       <h2 className={css.title}>Register</h2>
       <p className={css.formText}>
         To start using our services, please fill out the registration form
         below. All fields are mandatory:
       </p>
+
       <input
         className={css.input}
         type="text"
-        name="name"
         placeholder="Name"
         {...register("name")}
       />
@@ -51,7 +67,6 @@ export default function RegisterForm({ onSubmit }) {
       <input
         className={css.input}
         type="email"
-        name="email"
         placeholder="Email"
         {...register("email")}
       />
@@ -60,26 +75,18 @@ export default function RegisterForm({ onSubmit }) {
         <input
           className={css.input}
           type={showPassword ? "text" : "password"}
-          name="password"
           placeholder="Password"
           {...register("password")}
         />
-        <button
-          className={css.btnIcon}
-          type="button"
-          onClick={togglePassword}
-          aria-label={showPassword ? "Hide password" : "Show password"}
-        >
-          {/* <Icon
-            className={css.iconEye}
-            name={showPassword ? "eye" : "eye-off"}
-            size={20}
-          /> */}
+        <button className={css.btnIcon} type="button" onClick={togglePassword}>
+          👁
         </button>
       </div>
-      <button type="submit" className={css.btn}>
-        Register
+
+      <button type="submit" className={css.btn} disabled={loading}>
+        {loading ? "Loading..." : "Register"}
       </button>
+
       <a className={css.link}>Login</a>
     </form>
   );
