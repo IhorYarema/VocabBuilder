@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<RegisterPage />} />
-
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

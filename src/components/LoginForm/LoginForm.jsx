@@ -1,15 +1,14 @@
-import css from "./RegisterForm.module.css";
+import css from "./LoginForm.module.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../redux/auth/operations";
+import { loginUser } from "../../redux/auth/operations";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -45,7 +44,7 @@ export default function RegisterForm() {
   const togglePassword = () => setShowPassword((p) => !p);
 
   const handleFormSubmit = async (data) => {
-    const result = await dispatch(registerUser(data));
+    const result = await dispatch(loginUser(data));
 
     if (result.error) {
       toast.error(result.payload || "Login failed");
@@ -61,18 +60,10 @@ export default function RegisterForm() {
       className={css.form}
       onSubmit={handleSubmit(handleFormSubmit, onError)}
     >
-      <h2 className={css.title}>Register</h2>
+      <h2 className={css.title}>Login</h2>
       <p className={css.formText}>
-        To start using our services, please fill out the registration form
-        below. All fields are mandatory:
+        Please enter your login details to continue using our service:
       </p>
-
-      <input
-        className={css.input}
-        type="text"
-        placeholder="Name"
-        {...register("name")}
-      />
 
       <input
         className={css.input}
@@ -94,11 +85,11 @@ export default function RegisterForm() {
       </div>
 
       <button type="submit" className={css.btn} disabled={loading}>
-        {loading ? "Loading..." : "Register"}
+        {loading ? "Loading..." : "Login"}
       </button>
 
-      <NavLink className={css.link} to="/login">
-        Login
+      <NavLink className={css.link} to="/register">
+        Register
       </NavLink>
     </form>
   );
