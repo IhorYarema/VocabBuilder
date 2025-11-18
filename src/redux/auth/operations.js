@@ -79,3 +79,20 @@ export const fetchCurrentUser = createAsyncThunk(
     }
   }
 );
+
+export const refreshUser = createAsyncThunk(
+  "auth/refreshUser",
+  async (_, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
+
+    if (!token) return thunkAPI.rejectWithValue("No token");
+
+    try {
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+      const { data } = await api.get("/users/current");
+      return data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data?.message);
+    }
+  }
+);

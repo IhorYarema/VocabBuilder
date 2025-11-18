@@ -4,6 +4,7 @@ import {
   loginUser,
   logoutUserThunk,
   fetchCurrentUser,
+  refreshUser,
 } from "./operations";
 
 const initialState = {
@@ -76,6 +77,12 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
         state.error = action.payload;
+      })
+
+      // REFRESH USER
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
       });
   },
 });
