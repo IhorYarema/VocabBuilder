@@ -4,12 +4,11 @@ import {
   loginUser,
   logoutUserThunk,
   fetchCurrentUser,
-  refreshUser,
 } from "./operations";
 
 const initialState = {
   user: null,
-  token: null,
+  token: localStorage.getItem("token") ?? null,
   isLoggedIn: false,
   loading: false,
   error: null,
@@ -77,12 +76,6 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
         state.error = action.payload;
-      })
-
-      // REFRESH USER
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoggedIn = true;
       });
   },
 });

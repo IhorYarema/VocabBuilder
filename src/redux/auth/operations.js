@@ -16,7 +16,7 @@ export const registerUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await api.post("/users/signup", credentials);
-      setAuthHeader(response.data.token); // сразу ставим токен
+      setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -52,7 +52,7 @@ export const logoutUserThunk = createAsyncThunk(
     try {
       setAuthHeader(token);
       await api.post("/users/signout");
-      setAuthHeader(null); // очищаем токен
+      setAuthHeader(null);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
@@ -76,23 +76,6 @@ export const fetchCurrentUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
-
-export const refreshUser = createAsyncThunk(
-  "auth/refreshUser",
-  async (_, thunkAPI) => {
-    const token = thunkAPI.getState().auth.token;
-
-    if (!token) return thunkAPI.rejectWithValue("No token");
-
-    try {
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      const { data } = await api.get("/users/current");
-      return data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.response?.data?.message);
     }
   }
 );
