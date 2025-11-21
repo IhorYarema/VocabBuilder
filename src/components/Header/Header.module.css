@@ -16,3 +16,22 @@
     padding: 20px 100px;
   }
 }
+
+.userNav {
+  display: none;
+}
+
+@media (min-width: 1440x) {
+  .userNavr {
+    display: flex;
+  }
+}
+
+.burgerMenu {
+}
+
+@media (min-width: 1440x) {
+  .burgerMenu {
+    display: none;
+  }
+}

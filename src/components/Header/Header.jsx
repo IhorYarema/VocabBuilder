@@ -3,6 +3,7 @@ import Logo from "../Logo/Logo";
 import UserNav from "../UserNav/UserNav";
 import UserBar from "../UserBar/UserBar";
 import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
+import LogOutBtn from "../LogOutBtn/LogOutBtn.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -33,9 +34,14 @@ export default function Header() {
     <header className={css.header}>
       <div className={css.container}>
         <Logo />
-        <BurgerMenu open={menuOpen} setOpen={setMenuOpen} />
-        <UserNav />
-        <UserBar />
+        <BurgerMenu
+          open={menuOpen}
+          setOpen={setMenuOpen}
+          className={css.burgerMenu}
+        />
+        <UserNav className={css.userNav} />
+        <UserBar className={css.userBar} />
+        <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} />
       </div>
     </header>
   );

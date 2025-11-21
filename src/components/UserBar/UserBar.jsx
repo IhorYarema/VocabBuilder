@@ -1,11 +1,11 @@
 import { useState } from "react";
 import css from "./UserBar.module.css";
-// import { selectUserName } from "../../../redux/auth/selectors";
+import { selectUserName } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 export default function UserBar({ className }) {
   const [showModal, setShowModal] = useState(false);
-  //   const userName = useSelector(selectUserName);
+  const userName = useSelector(selectUserName);
 
   return (
     <div className={`${css.wrapper} ${className}`}>
