@@ -16,6 +16,8 @@ const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const DictionaryPage = lazy(() =>
   import("./pages/DictionaryPage/DictionaryPage")
 );
+const RecommendPage = lazy(() => import("./pages/RecommendPage/RecommendPage"));
+const TrainingPage = lazy(() => import("./pages/TrainingPage/TrainingPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +70,24 @@ function App() {
               element={
                 <PrivateRoute>
                   <DictionaryPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/recommend"
+              element={
+                <PrivateRoute>
+                  <RecommendPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/training"
+              element={
+                <PrivateRoute>
+                  <TrainingPage />
                 </PrivateRoute>
               }
             />

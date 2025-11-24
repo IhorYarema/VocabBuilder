@@ -22,7 +22,7 @@ export default function UserNav({
         Dictionary
       </NavLink>
       <NavLink
-        to="/dictionary"
+        to="/recommend"
         end
         className={({ isActive }) =>
           `${css.link} ${css.dictionary} ${isActive ? css.active : ""}`
@@ -32,7 +32,7 @@ export default function UserNav({
         Recommend
       </NavLink>
       <NavLink
-        to="/dictionary"
+        to="/training"
         end
         className={({ isActive }) =>
           `${css.link} ${css.dictionary} ${isActive ? css.active : ""}`
