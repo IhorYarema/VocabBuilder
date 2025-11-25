@@ -16,24 +16,28 @@ export const fetchCategories = createAsyncThunk(
 
 // GET words with filters
 export const fetchWords = createAsyncThunk(
-  "words/fetchWords",
-  async ({ category, search }, thunkAPI) => {
+  "filters/fetchWords",
+  async ({ category, verbType, query }, thunkAPI) => {
     try {
-      let url = "/words";
+      const params = new URLSearchParams();
 
       if (category && category !== "all") {
-        url = `/words/${category}`;
+        params.append("category", category);
       }
 
-      // додаємо параметр пошуку
-      if (search) {
-        url += `?keyword=${encodeURIComponent(search)}`;
+      if (category === "verb" && verbType) {
+        params.append("verbType", verbType);
       }
 
-      const { data } = await api.get(url);
+      if (query) {
+        params.append("keyword", query);
+      }
+
+      const { data } = await api.get(`/words?${params.toString()}`);
+
       return data;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response?.data || e.message);
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
