@@ -36,3 +36,15 @@ export const updateWord = createAsyncThunk(
     }
   }
 );
+
+export const addWord = createAsyncThunk(
+  "words/addWord",
+  async (wordData, thunkAPI) => {
+    try {
+      const { data } = await api.post("/words/add", wordData);
+      return data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data || err.message);
+    }
+  }
+);

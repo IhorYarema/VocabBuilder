@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
 import { useDispatch } from "react-redux";
 import { updateWord } from "../../../redux/words/operations";
 

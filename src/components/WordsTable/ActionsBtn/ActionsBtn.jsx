@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import Popover from "@mui/material/Popover";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Popover from "@mui/material/Popover";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export default function ActionsBtn({ onEdit, onDelete }) {
   const [anchor, setAnchor] = useState(null);
@@ -10,10 +10,10 @@ export default function ActionsBtn({ onEdit, onDelete }) {
   return (
     <>
       <button onClick={(e) => setAnchor(e.currentTarget)}>
-        {/* <MoreVertIcon /> */}
+        <MoreVertIcon />
       </button>
 
-      {/* <Popover
+      <Popover
         open={open}
         anchorEl={anchor}
         onClose={() => setAnchor(null)}
@@ -23,7 +23,7 @@ export default function ActionsBtn({ onEdit, onDelete }) {
           <button onClick={onEdit}>Edit</button>
           <button onClick={onDelete}>Delete</button>
         </div>
-      </Popover> */}
+      </Popover>
     </>
   );
 }

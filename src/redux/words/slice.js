@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserWords, deleteWord, updateWord } from "./operations";
+import { fetchUserWords, deleteWord, updateWord, addWord } from "./operations";
 
 const initialState = {
   items: [],
@@ -34,6 +34,13 @@ const wordsSlice = createSlice({
           (w) => w._id === action.payload._id
         );
         if (index !== -1) state.items[index] = action.payload;
+      })
+
+      .addCase(addWord.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(addWord.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });
