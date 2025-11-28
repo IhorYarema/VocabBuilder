@@ -39,9 +39,21 @@ export const updateWord = createAsyncThunk(
 
 export const addWord = createAsyncThunk(
   "words/addWord",
-  async (wordData, thunkAPI) => {
+  async ({ id, newWord }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("No access token");
+    }
+
     try {
-      const { data } = await api.post("/words/add", wordData);
+      // Устанавливаем токен
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+
+      // Правильный URL с ID пользователя
+      const { data } = await api.post(`/words/add/${id}`, newWord);
+
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
