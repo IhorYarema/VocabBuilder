@@ -39,7 +39,7 @@ export const updateWord = createAsyncThunk(
 
 export const addWord = createAsyncThunk(
   "words/addWord",
-  async ({ id, newWord }, thunkAPI) => {
+  async ({ newWord }, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
@@ -52,7 +52,7 @@ export const addWord = createAsyncThunk(
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
       // Правильный URL с ID пользователя
-      const { data } = await api.post(`/words/add/${id}`, newWord);
+      const { data } = await api.post(`/words/create`, newWord);
 
       return data;
     } catch (err) {

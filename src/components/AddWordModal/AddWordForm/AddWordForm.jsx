@@ -10,6 +10,8 @@ export default function AddWordForm({ onSuccess, onCancel }) {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
 
+  const userId = useSelector((state) => state.auth.user?._id);
+
   const initialValues = {
     en: "",
     ua: "",
@@ -18,15 +20,14 @@ export default function AddWordForm({ onSuccess, onCancel }) {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(addWord(values))
+    dispatch(addWord({ id: userId, newWord: values }))
       .unwrap()
       .then((resp) => {
         toast.success(`Word "${resp.en}" added!`);
-        onSuccess(); // закриваємо модалку
+        onSuccess();
       })
       .catch((err) => {
         toast.error(err?.message || "Server error");
-        // Модалка НЕ закривається
       })
       .finally(() => setSubmitting(false));
   };
