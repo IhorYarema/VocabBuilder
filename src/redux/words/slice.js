@@ -18,7 +18,8 @@ const wordsSlice = createSlice({
       })
       .addCase(fetchUserWords.fulfilled, (state, action) => {
         state.loading = false;
-        state.items = action.payload;
+        state.items = action.payload.results;
+        // console.log("WORDS:", action.payload);
       })
       .addCase(fetchUserWords.rejected, (state, action) => {
         state.loading = false;
@@ -37,7 +38,7 @@ const wordsSlice = createSlice({
       })
 
       .addCase(addWord.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        state.items = [...state.items, action.payload];
       })
       .addCase(addWord.rejected, (state, action) => {
         state.error = action.payload;

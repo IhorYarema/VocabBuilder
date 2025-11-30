@@ -5,7 +5,7 @@ export const fetchUserWords = createAsyncThunk(
   "words/fetchUserWords",
   async (_, thunkAPI) => {
     try {
-      const { data } = await api.get("/words/all");
+      const { data } = await api.get("/words/own");
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response?.data || e.message);
@@ -39,21 +39,17 @@ export const updateWord = createAsyncThunk(
 
 export const addWord = createAsyncThunk(
   "words/addWord",
-  async ({ newWord }, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue("No access token");
-    }
-
+  async (wordData, thunkAPI) => {
     try {
-      // Устанавливаем токен
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      if (!token) return thunkAPI.rejectWithValue("No access token");
+
+      // Устанавливаем Authorization
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-      // Правильный URL с ID пользователя
-      const { data } = await api.post(`/words/create`, newWord);
-
+      // Отправка на бекенд
+      const { data } = await api.post("/words/create", wordData);
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);

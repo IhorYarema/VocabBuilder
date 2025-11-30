@@ -28,11 +28,15 @@ export default function WordsTable() {
     () => [
       {
         header: "Word",
-        accessorKey: "word",
+        accessorKey: "en",
       },
       {
         header: "Translation",
-        accessorKey: "translation",
+        accessorKey: "ua",
+      },
+      {
+        header: "Category",
+        accessorKey: "category",
       },
       {
         header: "Progress",
@@ -48,7 +52,7 @@ export default function WordsTable() {
         ),
       },
     ],
-    []
+    [dispatch]
   );
 
   const table = useReactTable({

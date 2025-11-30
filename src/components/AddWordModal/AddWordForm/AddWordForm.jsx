@@ -1,15 +1,14 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addWord } from "../../../redux/words/operations";
+import { addWord } from "../../../redux/words/operations"; // новый thunk
 import { toast } from "react-toastify";
 import { selectCategories } from "../../../redux/filters/selectors";
-import { addWordSchema } from "../../../schemas/addWordSchema";
 import css from "./AddWordForm.module.css";
+import { addWordSchema } from "../../../schemas/addWordSchema";
 
 export default function AddWordForm({ onSuccess, onCancel }) {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
-
   const userId = useSelector((state) => state.auth.user?._id);
 
   const initialValues = {
@@ -20,11 +19,20 @@ export default function AddWordForm({ onSuccess, onCancel }) {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(addWord({ id: userId, newWord: values }))
+    const payload = { ...values };
+
+    // isIrregular отправляем только для глаголов
+    if (payload.category !== "verb") {
+      delete payload.isIrregular;
+    } else {
+      payload.isIrregular = payload.isIrregular === "true";
+    }
+
+    dispatch(addWord(payload))
       .unwrap()
       .then((resp) => {
         toast.success(`Word "${resp.en}" added!`);
-        onSuccess();
+        onSuccess(); // закрыть модалку
       })
       .catch((err) => {
         toast.error(err?.message || "Server error");
