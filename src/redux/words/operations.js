@@ -27,12 +27,21 @@ export const deleteWord = createAsyncThunk(
 
 export const updateWord = createAsyncThunk(
   "words/updateWord",
-  async ({ id, payload }, thunkAPI) => {
+  async ({ wordId, values }, thunkAPI) => {
     try {
-      const { data } = await api.patch(`/words/${id}`, payload);
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      if (!token) return thunkAPI.rejectWithValue("No access token");
+
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+
+      const payload = { ...values };
+      if (payload.category !== "verb") delete payload.isIrregular;
+
+      const { data } = await api.patch(`/words/edit/${wordId}`, payload);
       return data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.response?.data || e.message);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
   }
 );

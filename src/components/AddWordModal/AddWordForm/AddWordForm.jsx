@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { addWord } from "../../../redux/words/operations"; // новый thunk
+import { addWord } from "../../../redux/words/operations";
 import { toast } from "react-toastify";
 import { selectCategories } from "../../../redux/filters/selectors";
 import css from "./AddWordForm.module.css";

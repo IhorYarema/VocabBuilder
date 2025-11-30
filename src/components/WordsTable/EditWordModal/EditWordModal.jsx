@@ -1,35 +1,31 @@
-import { useState } from "react";
-import Modal from "@mui/material/Modal";
-import { useDispatch } from "react-redux";
-import { updateWord } from "../../../redux/words/operations";
+import { useEffect } from "react";
+import EditWordForm from "./EditWordForm/EditWordForm";
+import css from "./EditWordModal.module.css";
 
 export default function EditWordModal({ open, onClose, word }) {
-  const [value, setValue] = useState(word?.translation || "");
-  const dispatch = useDispatch();
+  // Escape
+  useEffect(() => {
+    const handleKey = (e) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
-  const handleSave = () => {
-    dispatch(updateWord({ id: word._id, payload: { translation: value } }));
-    onClose();
+  const closeByBackdrop = (e) => {
+    if (e.target === e.currentTarget) onClose();
   };
 
+  if (!open || !word) return null;
+
   return (
-    <Modal open={open} onClose={onClose}>
-      <div
-        style={{
-          padding: 20,
-          background: "#fff",
-          margin: "15% auto",
-          width: 300,
-        }}
-      >
-        <h3>Edit word</h3>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <button onClick={handleSave}>Save</button>
+    <div className={css.backdrop} onClick={closeByBackdrop}>
+      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+        <button className={css.closeBtn} onClick={onClose}>
+          ✕
+        </button>
+        <h2 className={css.title}>Add new word</h2>
+
+        <EditWordForm word={word} onSuccess={onClose} onCancel={onClose} />
       </div>
-    </Modal>
+    </div>
   );
 }
