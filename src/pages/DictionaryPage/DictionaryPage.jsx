@@ -5,6 +5,8 @@ import WordsPagination from "../../components/WordsPagination/WordsPagination";
 import { fetchUserWords } from "../../redux/words/operations";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import AddWordBtn from "../../components/AddWordBtn/AddWordBtn";
+import TrainOneselfBtn from "../../components/TrainOneselfBtn/TrainOneselfBtn";
 
 export default function DictionaryPage() {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ export default function DictionaryPage() {
   return (
     <section className={css.section}>
       <Dashboard />
+      <AddWordBtn />
+      <TrainOneselfBtn />
       <WordsTable />
       <WordsPagination
         page={page}

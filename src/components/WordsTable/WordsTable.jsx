@@ -12,8 +12,9 @@ import { selectWords, selectWordsLoading } from "../../redux/words/selectors";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
+import { addWordFromRecommend } from "../../redux/recommend/operations";
 
-export default function WordsTable() {
+export default function WordsTable({ items, mode = "dictionary" }) {
   const dispatch = useDispatch();
   const words = useSelector(selectWords);
   const loading = useSelector(selectWordsLoading);
@@ -24,8 +25,8 @@ export default function WordsTable() {
     dispatch(fetchUserWords());
   }, [dispatch]);
 
-  const columns = useMemo(
-    () => [
+  const columns = useMemo(() => {
+    const base = [
       {
         header: "Word",
         accessorKey: "en",
@@ -40,9 +41,14 @@ export default function WordsTable() {
       },
       {
         header: "Progress",
+        accessorFn: (row) => row.progress,
         cell: ({ row }) => <ProgressBar value={row.original.progress} />,
       },
-      {
+    ];
+
+    // ░░ DICTIONARY MODE (own words) ░░
+    if (mode === "dictionary") {
+      base.push({
         header: "Actions",
         cell: ({ row }) => (
           <ActionsBtn
@@ -50,10 +56,34 @@ export default function WordsTable() {
             onDelete={() => dispatch(deleteWord(row.original._id))}
           />
         ),
-      },
-    ],
-    [dispatch]
-  );
+      });
+    }
+
+    // ░░ RECOMMEND MODE (foreign words) ░░
+    if (mode === "recommend") {
+      base.push({
+        header: "Add",
+        cell: ({ row }) => (
+          <button
+            type="button"
+            onClick={() => dispatch(addWordFromRecommend(row.original._id))}
+            style={{
+              padding: "6px 10px",
+              background: "#4CAF50",
+              color: "white",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Add to dictionary
+          </button>
+        ),
+      });
+    }
+
+    return base;
+  }, [dispatch, mode]);
 
   const table = useReactTable({
     data: words,
