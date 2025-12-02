@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
 import css from "./RecommendPage.module.css";
+import Dashboard from "../../components/Dashboard/Dashboard";
+import WordsTable from "../../components/WordsTable/WordsTable";
 
 export default function RecommendPage() {
   return (
     <section className={css.section}>
-      <div className={css.container}>
-        <h1 className={css.code}>RecommendPage</h1>
-        <Link to="/" className={css.homeBtn}>
-          Go Back Home
-        </Link>
-      </div>
+      <Dashboard />
+      <WordsTable />
     </section>
   );
 }

@@ -3,9 +3,12 @@ import api from "../../services/client";
 
 export const fetchUserWords = createAsyncThunk(
   "words/fetchUserWords",
-  async (_, thunkAPI) => {
+  async ({ page = 1, limit = 10 }, thunkAPI) => {
     try {
-      const { data } = await api.get("/words/own");
+      const { data } = await api.get("/words/own", {
+        params: { page, limit },
+      });
+
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response?.data || e.message);

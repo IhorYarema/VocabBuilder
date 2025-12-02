@@ -3,6 +3,9 @@ import { fetchUserWords, deleteWord, updateWord, addWord } from "./operations";
 
 const initialState = {
   items: [],
+  page: 1,
+  totalPages: 1,
+  limit: 10,
   loading: false,
   error: null,
 };
@@ -19,7 +22,8 @@ const wordsSlice = createSlice({
       .addCase(fetchUserWords.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload.results;
-        // console.log("WORDS:", action.payload);
+        state.page = action.payload.page;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchUserWords.rejected, (state, action) => {
         state.loading = false;
