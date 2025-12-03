@@ -8,6 +8,7 @@ import {
   addWordFromRecommend,
 } from "../../redux/recommend/operations";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function RecommendPage() {
   const dispatch = useDispatch();
@@ -15,10 +16,23 @@ export default function RecommendPage() {
 
   useEffect(() => {
     dispatch(fetchRecommendedWords({ page, limit }));
-  }, [page, limit]);
+  }, [dispatch, page, limit]);
 
-  const handleAdd = (id) => {
-    dispatch(addWordFromRecommend(id));
+  const handleAdd = async (id) => {
+    try {
+      await dispatch(addWordFromRecommend(id)).unwrap();
+      toast.success("Word added to your dictionary!");
+    } catch (err) {
+      if (err === "Such a word exists") {
+        toast.info("This word is already in your dictionary!");
+      } else {
+        toast.error(err?.message || "Failed to add word");
+      }
+    }
+  };
+
+  const handlePageChange = (p) => {
+    dispatch(fetchRecommendedWords({ page: p, limit }));
   };
 
   return (
@@ -32,7 +46,7 @@ export default function RecommendPage() {
       <WordsPagination
         page={page}
         totalPages={totalPages}
-        onChange={(p) => dispatch(fetchRecommendedWords({ page: p, limit }))}
+        onChange={handlePageChange}
       />
     </section>
   );

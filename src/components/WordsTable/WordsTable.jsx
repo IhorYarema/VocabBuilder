@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   useReactTable,
@@ -6,24 +6,19 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
-import { fetchUserWords, deleteWord } from "../../redux/words/operations";
-import { selectWords, selectWordsLoading } from "../../redux/words/selectors";
+import { deleteWord } from "../../redux/words/operations";
+import { selectWordsLoading } from "../../redux/words/selectors";
 
 import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
 import { addWordFromRecommend } from "../../redux/recommend/operations";
 
-export default function WordsTable({ items, mode = "dictionary" }) {
+export default function WordsTable({ items = [], mode = "dictionary" }) {
   const dispatch = useDispatch();
-  const words = useSelector(selectWords);
   const loading = useSelector(selectWordsLoading);
 
   const [editWord, setEditWord] = useState(null);
-
-  useEffect(() => {
-    dispatch(fetchUserWords());
-  }, [dispatch]);
 
   const columns = useMemo(() => {
     const base = [
@@ -67,14 +62,6 @@ export default function WordsTable({ items, mode = "dictionary" }) {
           <button
             type="button"
             onClick={() => dispatch(addWordFromRecommend(row.original._id))}
-            style={{
-              padding: "6px 10px",
-              background: "#4CAF50",
-              color: "white",
-              borderRadius: "6px",
-              border: "none",
-              cursor: "pointer",
-            }}
           >
             Add to dictionary
           </button>
@@ -86,7 +73,7 @@ export default function WordsTable({ items, mode = "dictionary" }) {
   }, [dispatch, mode]);
 
   const table = useReactTable({
-    data: words,
+    data: items || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });

@@ -18,12 +18,16 @@ export default function DictionaryPage() {
 
   const handlePageChange = (newPage) =>
     dispatch(fetchUserWords({ page: newPage, limit }));
+
   return (
     <section className={css.section}>
       <Dashboard />
       <AddWordBtn />
       <TrainOneselfBtn />
-      <WordsTable />
+
+      {/* ⬇ ОБОВʼЯЗКОВО передаємо items + mode */}
+      <WordsTable items={items} mode="dictionary" />
+
       <WordsPagination
         page={page}
         totalPages={totalPages}
