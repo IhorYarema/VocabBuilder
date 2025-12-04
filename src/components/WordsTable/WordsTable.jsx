@@ -34,14 +34,9 @@ export default function WordsTable({ items = [], mode = "dictionary" }) {
         header: "Category",
         accessorKey: "category",
       },
-      {
-        header: "Progress",
-        accessorFn: (row) => row.progress,
-        cell: ({ row }) => <ProgressBar value={row.original.progress} />,
-      },
     ];
 
-    // ░░ DICTIONARY MODE (own words) ░░
+    // ░░ DICTIONARY MODE ░░
     if (mode === "dictionary") {
       base.push({
         header: "Actions",
@@ -54,7 +49,7 @@ export default function WordsTable({ items = [], mode = "dictionary" }) {
       });
     }
 
-    // ░░ RECOMMEND MODE (foreign words) ░░
+    // ░░ RECOMMEND MODE ░░
     if (mode === "recommend") {
       base.push({
         header: "Add",
@@ -62,6 +57,14 @@ export default function WordsTable({ items = [], mode = "dictionary" }) {
           <button
             type="button"
             onClick={() => dispatch(addWordFromRecommend(row.original._id))}
+            style={{
+              padding: "6px 10px",
+              background: "#4CAF50",
+              color: "white",
+              borderRadius: "6px",
+              border: "none",
+              cursor: "pointer",
+            }}
           >
             Add to dictionary
           </button>
