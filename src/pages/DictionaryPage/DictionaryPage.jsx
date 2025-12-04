@@ -25,7 +25,6 @@ export default function DictionaryPage() {
       <AddWordBtn />
       <TrainOneselfBtn />
 
-      {/* ⬇ ОБОВʼЯЗКОВО передаємо items + mode */}
       <WordsTable items={items} mode="dictionary" />
 
       <WordsPagination

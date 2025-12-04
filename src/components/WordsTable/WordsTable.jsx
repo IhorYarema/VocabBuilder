@@ -9,7 +9,6 @@ import {
 import { deleteWord } from "../../redux/words/operations";
 import { selectWordsLoading } from "../../redux/words/selectors";
 
-import ProgressBar from "./ProgressBar/ProgressBar";
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
 import { addWordFromRecommend } from "../../redux/recommend/operations";
@@ -23,35 +22,40 @@ export default function WordsTable({ items = [], mode = "dictionary" }) {
   const columns = useMemo(() => {
     const base = [
       {
+        id: "word",
         header: "Word",
         accessorKey: "en",
       },
       {
+        id: "translation",
         header: "Translation",
         accessorKey: "ua",
       },
       {
+        id: "category",
         header: "Category",
         accessorKey: "category",
       },
     ];
 
-    // ░░ DICTIONARY MODE ░░
     if (mode === "dictionary") {
       base.push({
+        id: "actions",
         header: "Actions",
         cell: ({ row }) => (
           <ActionsBtn
             onEdit={() => setEditWord(row.original)}
-            onDelete={() => dispatch(deleteWord(row.original._id))}
+            onDelete={() => {
+              dispatch(deleteWord(row.original._id));
+            }}
           />
         ),
       });
     }
 
-    // ░░ RECOMMEND MODE ░░
     if (mode === "recommend") {
       base.push({
+        id: "add",
         header: "Add",
         cell: ({ row }) => (
           <button

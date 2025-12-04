@@ -20,7 +20,7 @@ export const deleteWord = createAsyncThunk(
   "words/deleteWord",
   async (id, thunkAPI) => {
     try {
-      await api.delete(`/words/${id}`);
+      await api.delete(`/words/delete/${id}`);
       return id;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response?.data || e.message);
