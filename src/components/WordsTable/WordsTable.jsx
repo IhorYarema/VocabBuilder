@@ -11,9 +11,12 @@ import { selectWordsLoading } from "../../redux/words/selectors";
 
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
-import { addWordFromRecommend } from "../../redux/recommend/operations";
 
-export default function WordsTable({ items = [], mode = "dictionary" }) {
+export default function WordsTable({
+  items = [],
+  mode = "dictionary",
+  onAddToDictionary,
+}) {
   const dispatch = useDispatch();
   const loading = useSelector(selectWordsLoading);
 
@@ -60,15 +63,7 @@ export default function WordsTable({ items = [], mode = "dictionary" }) {
         cell: ({ row }) => (
           <button
             type="button"
-            onClick={() => dispatch(addWordFromRecommend(row.original._id))}
-            style={{
-              padding: "6px 10px",
-              background: "#4CAF50",
-              color: "white",
-              borderRadius: "6px",
-              border: "none",
-              cursor: "pointer",
-            }}
+            onClick={() => onAddToDictionary(row.original._id)}
           >
             Add to dictionary
           </button>
