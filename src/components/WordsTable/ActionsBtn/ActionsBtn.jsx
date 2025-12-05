@@ -1,11 +1,27 @@
 import { useState } from "react";
 import Popover from "@mui/material/Popover";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { toast } from "react-toastify";
 
 export default function ActionsBtn({ onEdit, onDelete }) {
   const [anchor, setAnchor] = useState(null);
 
   const open = Boolean(anchor);
+
+  const handleEdit = () => {
+    setAnchor(null);
+    onEdit();
+  };
+
+  const handleDelete = async () => {
+    await setAnchor(null);
+    try {
+      onDelete();
+      toast.success("Word deleted!");
+    } catch (err) {
+      toast.error(err?.message || "Delete failed");
+    }
+  };
 
   return (
     <>
@@ -19,9 +35,16 @@ export default function ActionsBtn({ onEdit, onDelete }) {
         onClose={() => setAnchor(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <div style={{ padding: 10 }}>
-          <button onClick={onEdit}>Edit</button>
-          <button onClick={onDelete}>Delete</button>
+        <div
+          style={{
+            padding: 10,
+            display: "flex",
+            flexDirection: "column",
+            gap: 6,
+          }}
+        >
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       </Popover>
     </>
