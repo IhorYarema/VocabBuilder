@@ -13,14 +13,14 @@ export const addWordSchema = Yup.object({
   en: Yup.string()
     .matches(
       /\b[A-Za-z'-]+(?:\s+[A-Za-z'-]+)*\b/,
-      "Only English letters, commas, ' and - allowed"
+      "Only English letters allowed"
     )
     .required("English word is required"),
 
   ua: Yup.string()
     .matches(
       /^[А-ЩЬЮЯҐЄІЇа-щьюяґєії\s,.'’"-]+$/,
-      "Only Ukrainian letters and allowed symbols"
+      "Only Ukrainian letters allowed"
     )
     .required("Ukrainian word is required"),
 });
