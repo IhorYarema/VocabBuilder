@@ -11,6 +11,7 @@ import { selectWordsLoading } from "../../redux/words/selectors";
 
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 export default function WordsTable({
   items = [],
@@ -42,18 +43,25 @@ export default function WordsTable({
     ];
 
     if (mode === "dictionary") {
-      base.push({
-        id: "actions",
-        header: "Actions",
-        cell: ({ row }) => (
-          <ActionsBtn
-            onEdit={() => setEditWord(row.original)}
-            onDelete={() => {
-              dispatch(deleteWord(row.original._id));
-            }}
-          />
-        ),
-      });
+      base.push(
+        {
+          id: "progress",
+          header: "Progress",
+          cell: ({ row }) => <ProgressBar value={row.original.progress || 0} />,
+        },
+        {
+          id: "actions",
+          header: "Actions",
+          cell: ({ row }) => (
+            <ActionsBtn
+              onEdit={() => setEditWord(row.original)}
+              onDelete={() => {
+                dispatch(deleteWord(row.original._id));
+              }}
+            />
+          ),
+        }
+      );
     }
 
     if (mode === "recommend") {
