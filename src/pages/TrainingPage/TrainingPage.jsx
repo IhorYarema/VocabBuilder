@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTrainingTasks } from "../../redux/training/operations";
+import {
+  selectTasks,
+  selectLoading,
+  selectError,
+} from "../../redux/training/selectors";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import TrainingRoom from "../../components/TrainingRoom/TrainingRoom";
 import WellDoneModal from "../../components/WellDoneModal/WellDoneModal";
@@ -13,7 +18,10 @@ export default function TrainingPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { tasks, loading, error } = useSelector((s) => s.training);
+  const tasks = useSelector((state) => state.training.tasks);
+
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -23,15 +31,15 @@ export default function TrainingPage() {
     dispatch(fetchTrainingTasks());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to load training tasks");
+      navigate("/dictionary");
+    }
+  }, [error, navigate]);
+
   if (loading) return <p>Loading...</p>;
-
-  if (error) {
-    toast.error("Failed to load training tasks");
-    navigate("/dictionary");
-    return null;
-  }
-
-  if (tasks.length === 0) {
+  if (!tasks || tasks.length === 0) {
     return <EmptyTasksMessage />;
   }
 

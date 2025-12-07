@@ -18,62 +18,81 @@ export default function TrainingRoom({
 
   const [input, setInput] = useState("");
 
+  if (!tasks.length || currentIndex >= tasks.length) return null;
+
   const task = tasks[currentIndex];
   const isLast = currentIndex === tasks.length - 1;
+
+  const wordToShow = task.task === "en" ? task.ua : task.en;
 
   const handleNext = () => {
     if (input.trim()) {
       setAnswers((prev) => [...prev, { taskId: task._id, answer: input }]);
     }
-
     setInput("");
-
     if (!isLast) setCurrentIndex((i) => i + 1);
   };
 
-  const handleSave = () => {
-    const final = [...answers];
+  const handleSave = async () => {
+    const finalAnswers = [...answers];
     if (input.trim()) {
-      final.push({ taskId: task._id, answer: input });
+      finalAnswers.push({ taskId: task._id, answer: input });
     }
 
-    dispatch(sendTrainingResults(final))
-      .unwrap()
-      .then((res) => openModal(res))
-      .catch(() => {
-        toast.error("Progress not saved. Redirecting...");
-        navigate("/dictionary");
-      });
+    try {
+      const result = await dispatch(sendTrainingResults(finalAnswers)).unwrap();
+      openModal(result);
+    } catch {
+      toast.error("Progress not saved. Redirecting...");
+      navigate("/dictionary");
+    }
   };
 
   return (
     <div className={css.room}>
       <div className={css.left}>
+        <p className={css.label}>Enter translation</p>
         <input
           className={css.input}
           placeholder="Enter translation..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-      </div>
-
-      <div className={css.right}>
-        <h2 className={css.word}>{task.en}</h2>
-      </div>
-
-      <div className={css.actions}>
         {!isLast && (
           <button className={css.next} onClick={handleNext}>
             Next
           </button>
         )}
+      </div>
 
-        {isLast && (
+      <div className={css.right}>
+        <h2 className={css.word}>{wordToShow}</h2>
+        <div className={css.flagBlock}>
+          {task.task === "en" ? (
+            <>
+              🇺🇦 <span>Ukrainian</span>
+            </>
+          ) : (
+            <>
+              🇬🇧 <span>English</span>
+            </>
+          )}
+        </div>
+      </div>
+
+      {isLast && (
+        <div className={css.actions}>
           <button className={css.save} onClick={handleSave}>
             Save
           </button>
-        )}
-      </div>
+          <button
+            className={css.cancel}
+            onClick={() => navigate("/dictionary")}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 }
