@@ -4,7 +4,7 @@ import { selectUserName } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
 
 export default function UserBar({ className }) {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const userName = useSelector(selectUserName);
 
   return (
@@ -14,7 +14,7 @@ export default function UserBar({ className }) {
       </div>
       <span className={css.name}>{userName}</span>
       <div className={css.divider}></div>
-      <button
+      {/* <button
         className={css.logoutBtn}
         onClick={() => setShowModal(true)}
         aria-label="Logout"
@@ -22,7 +22,7 @@ export default function UserBar({ className }) {
         <svg className={css.logoutIcon}>
           <use href="/icons.svg#icon-logout" />
         </svg>
-      </button>
+      </button> */}
     </div>
   );
 }

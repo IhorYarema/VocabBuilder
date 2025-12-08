@@ -34,14 +34,17 @@ export default function Header() {
     <header className={css.header}>
       <div className={css.container}>
         <Logo />
-        <BurgerMenu
-          open={menuOpen}
-          setOpen={setMenuOpen}
-          className={css.burgerMenu}
-        />
-        <UserNav className={css.userNav} />
-        <UserBar className={css.userBar} />
-        <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} />
+        <div className={css.containerUserAndBurger}>
+          <UserBar className={css.userBar} />
+          <BurgerMenu
+            open={menuOpen}
+            setOpen={setMenuOpen}
+            className={css.burgerMenu}
+          />
+        </div>
+        {/* <UserNav className={css.userNav} /> */}
+
+        {/* <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} /> */}
       </div>
     </header>
   );
