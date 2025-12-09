@@ -1,4 +1,5 @@
 import css from "./BurgerMenu.module.css";
+import Icon from "../Icon/Icon";
 
 export default function BurgerMenu({ open, setOpen }) {
   return (
@@ -12,9 +13,7 @@ export default function BurgerMenu({ open, setOpen }) {
           <use href="/icons.svg#icon-close" />
         </svg>
       ) : (
-        <svg className={css.burgerIcon}>
-          <use href="/icons.svg#icon-burger" />
-        </svg>
+        <Icon className={css.iconNav} name="nav" />
       )}
     </button>
   );
