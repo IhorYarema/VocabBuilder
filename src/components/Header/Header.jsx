@@ -48,10 +48,10 @@ export default function Header() {
             setOpen={setMenuOpen}
             className={css.burgerMenu}
           />
-        </div>
 
-        {/* Logout button only on desktop */}
-        <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} />
+          {/* Logout button only on desktop */}
+          <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} />
+        </div>
       </div>
     </header>
   );

@@ -1,0 +1,8 @@
+.btn {
+  display: flex;
+  gap: 6px;
+}
+
+.iconArrow {
+  stroke: rgba(18, 20, 23, 1);
+}
