@@ -1,7 +1,7 @@
-import { useState } from "react";
 import css from "./UserBar.module.css";
 import { selectUserName } from "../../redux/auth/selectors";
 import { useSelector } from "react-redux";
+import Icon from "../Icon/Icon";
 
 export default function UserBar({ className }) {
   // const [showModal, setShowModal] = useState(false);
@@ -9,20 +9,10 @@ export default function UserBar({ className }) {
 
   return (
     <div className={`${css.wrapper} ${className}`}>
-      <div className={css.avatar}>
-        {userName ? userName.charAt(0).toUpperCase() : "?"}
-      </div>
       <span className={css.name}>{userName}</span>
-      <div className={css.divider}></div>
-      {/* <button
-        className={css.logoutBtn}
-        onClick={() => setShowModal(true)}
-        aria-label="Logout"
-      >
-        <svg className={css.logoutIcon}>
-          <use href="/icons.svg#icon-logout" />
-        </svg>
-      </button> */}
+      <div className={css.avatar}>
+        <Icon className={css.iconUser} name="gridicons_user" size={20} />
+      </div>
     </div>
   );
 }

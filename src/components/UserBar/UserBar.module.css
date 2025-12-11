@@ -1,3 +1,48 @@
 .wrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wrapper {
+    gap: 10px;
+  }
+}
+
+.name {
+}
+
+.avatar {
+  background-color: rgba(133, 170, 159, 1);
+  width: 36px;
+  height: 36px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.iconUser {
+}
+
+@media (min-width: 768px) {
+  .iconUser {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -6,11 +6,12 @@ export default function UserNav({
   closeMenu = () => {},
   userName = "",
   isMobile = false,
+  className = "",
 }) {
   const location = useLocation();
 
   return (
-    <nav className={css.navGroup}>
+    <nav className={`${css.navGroup} ${className}`}>
       <NavLink
         to="/dictionary"
         end
