@@ -16,9 +16,9 @@ export default function RegisterPage() {
             className={css.img}
           />
         </div>
-        <p>Word · Translation · Grammar · Progress</p>
+        <p className={css.text}>Word · Translation · Grammar · Progress</p>
 
-        <LoginForm />
+        <LoginForm className={css.form} />
       </div>
     </section>
   );

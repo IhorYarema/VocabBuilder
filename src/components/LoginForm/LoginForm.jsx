@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/auth/operations";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
+import Icon from "../Icon/Icon";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -19,7 +20,7 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-export default function RegisterForm() {
+export default function LoginForm({ className }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,13 +58,15 @@ export default function RegisterForm() {
 
   return (
     <form
-      className={css.form}
+      className={`${css.form} ${className}`}
       onSubmit={handleSubmit(handleFormSubmit, onError)}
     >
-      <h2 className={css.title}>Login</h2>
-      <p className={css.formText}>
-        Please enter your login details to continue using our service:
-      </p>
+      <div className={css.textContainer}>
+        <h2 className={css.title}>Login</h2>
+        <p className={css.formText}>
+          Please enter your login details to continue using our service:
+        </p>
+      </div>
 
       <input
         className={css.input}
@@ -80,7 +83,11 @@ export default function RegisterForm() {
           {...register("password")}
         />
         <button className={css.btnIcon} type="button" onClick={togglePassword}>
-          👁
+          <Icon
+            className={css.iconEye}
+            size={20}
+            name={showPassword ? "eye" : "eye-off"}
+          />
         </button>
       </div>
 
