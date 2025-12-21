@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/operations";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
+import Icon from "../Icon/Icon";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -61,14 +62,16 @@ export default function RegisterForm() {
       className={css.form}
       onSubmit={handleSubmit(handleFormSubmit, onError)}
     >
-      <h2 className={css.title}>Register</h2>
-      <p className={css.formText}>
-        To start using our services, please fill out the registration form
-        below. All fields are mandatory:
-      </p>
+      <div className={css.textContainer}>
+        <h2 className={css.title}>Register</h2>
+        <p className={css.formText}>
+          To start using our services, please fill out the registration form
+          below. All fields are mandatory:
+        </p>
+      </div>
 
       <input
-        className={css.input}
+        className={`${css.input} ${css.firstInput}`}
         type="text"
         placeholder="Name"
         {...register("name")}
@@ -89,7 +92,11 @@ export default function RegisterForm() {
           {...register("password")}
         />
         <button className={css.btnIcon} type="button" onClick={togglePassword}>
-          👁
+          <Icon
+            className={css.iconEye}
+            size={20}
+            name={showPassword ? "eye" : "eye-off"}
+          />
         </button>
       </div>
 

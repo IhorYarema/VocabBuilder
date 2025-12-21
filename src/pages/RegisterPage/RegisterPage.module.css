@@ -1,10 +1,146 @@
 .section {
-  background-color: rgba(248, 248, 248, 1);
+  background-color: rgba(255, 255, 255, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section::before {
+    content: "";
+    position: absolute;
+
+    width: 693px;
+    height: 597px;
+    top: 501px;
+    left: 138px;
+
+    background-image: url("/gradient.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    z-index: 0;
+  }
+
+  .section > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section::before {
+    bottom: -150px;
+    left: 814px;
+  }
 }
 
 .sectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .sectionContainer {
+    flex-direction: column-reverse;
+    padding: 140px 70px 106px 70px;
+  }
+}
+
+@media (min-width: 768px) {
+  .sectionContainer {
+    padding: 140px 70px 106px 70px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sectionContainer {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    gap: 80px;
+    padding: 114px 134px 104px 100px;
+  }
+}
+
+.logo {
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    margin-top: 24px;
+    margin-left: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .logo {
+    margin-top: 24px;
+    margin-left: 100px;
+  }
+}
+
+.imgtextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img {
   height: 100%;
+}
+
+.imgWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 64px 16px 64px;
+}
+
+@media (min-width: 768px) {
+  .imgWrapper {
+    display: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .imgWrapper {
+    display: flex;
+    padding: 0;
+  }
+}
+
+.text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .text {
+    display: flex;
+    margin-top: 98px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .text {
+    margin-top: 16px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .form {
+    margin-bottom: 0;
+  }
 }
