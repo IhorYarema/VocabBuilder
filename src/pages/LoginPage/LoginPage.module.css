@@ -3,6 +3,38 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section::before {
+    content: "";
+    position: absolute;
+
+    width: 693px;
+    height: 597px;
+    top: 501px;
+    left: 138px;
+
+    background-image: url("/gradient.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    z-index: 0;
+  }
+
+  .section > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section::before {
+    bottom: -150px;
+    left: 814px;
+  }
 }
 
 .sectionContainer {
@@ -102,5 +134,11 @@
 @media (min-width: 768px) {
   .form {
     margin-bottom: 172px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .form {
+    margin-bottom: 0;
   }
 }

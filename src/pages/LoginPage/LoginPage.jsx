@@ -6,6 +6,7 @@ import Logo from "../../components/Logo/Logo";
 export default function RegisterPage() {
   return (
     <section className={css.section}>
+      <div className={css.gradientBg} />
       <Logo className={css.logo} />
       <div className={css.sectionContainer}>
         <div className={css.imgtextContainer}>
