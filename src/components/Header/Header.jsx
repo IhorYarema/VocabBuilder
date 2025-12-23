@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { logoutUserThunk } from "../../redux/auth/operations.js";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -48,6 +49,7 @@ export default function Header() {
             setOpen={setMenuOpen}
             className={css.burgerMenu}
           />
+          <MobileMenu open={menuOpen} setOpen={setMenuOpen} />
 
           {/* Logout button only on desktop */}
           <LogOutBtn className={css.logOutBtn} onLogout={handleLogout} />

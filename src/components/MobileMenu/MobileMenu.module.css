@@ -1,0 +1,30 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.menu {
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  padding: 32px 24px;
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+/* ❌ на десктопі меню не потрібне */
+@media (min-width: 1440px) {
+  .backdrop {
+    display: none;
+  }
+}
