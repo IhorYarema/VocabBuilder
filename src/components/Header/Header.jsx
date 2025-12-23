@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header className={css.header}>
       <div className={css.container}>
-        <Logo />
+        <Logo className={css.logo} />
 
         {/* Desktop nav */}
         <UserNav className={css.userNav} />
