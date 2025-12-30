@@ -17,6 +17,13 @@
   position: relative;
 }
 
+@media (min-width: 768px) {
+  .menu {
+    width: 300px;
+    padding: 20px 32px;
+  }
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(0%);
@@ -38,17 +45,36 @@
   margin-bottom: 166px;
 }
 
+@media (min-width: 768px) {
+  .upperContainer {
+    margin-bottom: 170px;
+  }
+}
+
 .closeBtn {
   width: 32px;
+}
+
+@media (min-width: 768px) {
+  .closeBtn {
+    width: 40px;
+  }
 }
 
 .iconClose {
   color: rgba(252, 252, 252, 1);
 }
 
+@media (min-width: 768px) {
+  .iconClose {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 .img {
   position: absolute;
-  width: 185px;
+  width: 100%;
   bottom: 0;
   right: 0;
 }
