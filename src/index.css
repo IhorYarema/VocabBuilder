@@ -55,6 +55,7 @@ button {
   font-family: inherit;
   box-sizing: border-box;
   background-color: transparent;
+  padding: 0;
 }
 
 a {

@@ -18,10 +18,12 @@
 }
 
 .name {
+  color: rgba(252, 252, 252, 1);
 }
 
 .avatar {
-  background-color: rgba(133, 170, 159, 1);
+  /* background-color: rgba(133, 170, 159, 1); */
+  background-color: rgba(252, 252, 252, 1);
   width: 36px;
   height: 36px;
   border-radius: 30px;
@@ -38,6 +40,7 @@
 }
 
 .iconUser {
+  color: rgba(133, 170, 159, 1);
 }
 
 @media (min-width: 768px) {

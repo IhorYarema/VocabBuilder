@@ -1,13 +1,7 @@
 import css from "./UserNav.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 
-export default function UserNav({
-  isLoggedIn = false,
-  closeMenu = () => {},
-  userName = "",
-  isMobile = false,
-  className = "",
-}) {
+export default function UserNav({ closeMenu = () => {}, className = "" }) {
   const location = useLocation();
 
   return (

@@ -6,25 +6,49 @@
 }
 
 .menu {
-  width: 260px;
+  width: 185px;
+  box-sizing: border-box;
   height: 100%;
-  background: #fff;
-  padding: 32px 24px;
+  background: rgba(133, 170, 159, 1);
+  padding: 16px;
   animation: slideIn 0.3s ease forwards;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 @keyframes slideIn {
   from {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(50%);
+    transform: translateX(103%);
   }
 }
 
-/* ❌ на десктопі меню не потрібне */
 @media (min-width: 1440px) {
   .backdrop {
     display: none;
   }
+}
+
+.upperContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 166px;
+}
+
+.closeBtn {
+  width: 32px;
+}
+
+.iconClose {
+  color: rgba(252, 252, 252, 1);
+}
+
+.img {
+  position: absolute;
+  width: 185px;
+  bottom: 0;
+  right: 0;
 }

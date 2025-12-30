@@ -1,8 +1,12 @@
 .btn {
   display: flex;
   gap: 6px;
+  color: rgba(252, 252, 252, 1);
+  font-size: 14px;
+  margin-top: 28px;
+  padding: 0;
 }
 
 .iconArrow {
-  stroke: rgba(18, 20, 23, 1);
+  /* stroke: rgba(18, 20, 23, 1); */
 }
