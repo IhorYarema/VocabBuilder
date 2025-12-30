@@ -13,6 +13,7 @@
 @media (min-width: 768px) {
   .form {
     justify-content: center;
+    align-items: flex-start;
     padding: 48px 64px;
     border-radius: 30px;
     height: 518px;
@@ -84,4 +85,7 @@ input::placeholder {
 .link {
   text-decoration: underline;
   color: rgba(18, 20, 23, 0.5);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
