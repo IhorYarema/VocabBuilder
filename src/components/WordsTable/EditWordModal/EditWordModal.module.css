@@ -1,0 +1,17 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  padding: 251px 16px 0 16px;
+}
+
+.modal {
+  position: relative;
+  background-color: rgba(133, 170, 159, 1);
+}
+
+.iconCross {
+  position: absolute;
+  color: rgba(252, 252, 252, 1);
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import EditWordForm from "./EditWordForm/EditWordForm";
 import css from "./EditWordModal.module.css";
+import Icon from "../../Icon/Icon";
 
 export default function EditWordModal({ open, onClose, word }) {
   // Escape
@@ -20,9 +21,8 @@ export default function EditWordModal({ open, onClose, word }) {
     <div className={css.backdrop} onClick={closeByBackdrop}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <button className={css.closeBtn} onClick={onClose}>
-          ✕
+          <Icon className={css.iconCross} name="x" size={24} />
         </button>
-        <h2 className={css.title}>Add new word</h2>
 
         <EditWordForm word={word} onSuccess={onClose} onCancel={onClose} />
       </div>

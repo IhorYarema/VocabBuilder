@@ -4,6 +4,7 @@ import { updateWord } from "../../../../redux/words/operations";
 import { toast } from "react-toastify";
 import css from "./EditWordForm.module.css";
 import { editWordSchema } from "../../../../schemas/editWordSchema";
+import Icon from "../../../Icon/Icon";
 
 export default function EditWordForm({ word, onSuccess, onCancel }) {
   const dispatch = useDispatch();
@@ -50,13 +51,15 @@ export default function EditWordForm({ word, onSuccess, onCancel }) {
       {({ isSubmitting }) => (
         <Form className={css.form}>
           <label>
-            English:
-            <Field type="text" name="en" />
+            <Icon className={css.iconUa} name="ukraine" size={28} />
+            Ukrainian
+            <Field type="text" name="ua" />
           </label>
 
           <label>
-            Ukrainian:
-            <Field type="text" name="ua" />
+            <Icon className={css.iconUa} name="unitedkingdom" size={28} />
+            English
+            <Field type="text" name="en" />
           </label>
 
           <div className={css.buttons}>
