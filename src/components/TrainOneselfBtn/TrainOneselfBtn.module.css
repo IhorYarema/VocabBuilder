@@ -1,0 +1,13 @@
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.iconArrow {
+  color: rgba(133, 170, 159, 1);
+}

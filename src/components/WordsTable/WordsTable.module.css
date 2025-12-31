@@ -1,0 +1,30 @@
+.thead .tr .th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.thead .tr .th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.thead .th {
+  color: rgba(18, 20, 23, 1);
+  padding-left: 14px;
+  background-color: rgba(133, 170, 159, 0.1);
+  height: 54px;
+  border-width: 0px, 1px, 1px, 0px;
+  border-style: solid;
+  border-color: rgba(219, 219, 219, 1);
+  min-width: 50px;
+}
+
+.categoryCol {
+  display: none;
+}
+
+.tbody .td {
+  background-color: rgba(252, 252, 252, 1);
+  border-width: 0px, 1px, 1px, 0px;
+  border-style: solid;
+  border-color: rgba(219, 219, 219, 1);
+  min-height: 89px;
+}

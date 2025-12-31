@@ -1,5 +1,6 @@
 import css from "./TrainOneselfBtn.module.css";
 import { NavLink } from "react-router-dom";
+import Icon from "../Icon/Icon";
 
 export default function AddWordBtn() {
   return (
@@ -12,6 +13,11 @@ export default function AddWordBtn() {
         }
       >
         Train oneself
+        <Icon
+          className={css.iconArrow}
+          name="switch-horizontal-one"
+          size={20}
+        />
       </NavLink>
     </>
   );

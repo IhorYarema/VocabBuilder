@@ -1,21 +1,17 @@
 import css from "./AddWordBtn.module.css";
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import AddWordModal from "../AddWordModal/AddWordModal";
+import Icon from "../Icon/Icon";
 
 export default function AddWordBtn() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Button
-        variant="contained"
-        onClick={() => setOpen(true)}
-        startIcon={<AddIcon />}
-      >
+      <button onClick={() => setOpen(true)} className={css.btn}>
         Add word
-      </Button>
+        <Icon className={css.iconAdd} name="plus" size={20} />
+      </button>
 
       <AddWordModal open={open} onClose={() => setOpen(false)} />
     </>

@@ -22,8 +22,10 @@ export default function DictionaryPage() {
   return (
     <section className={css.section}>
       <Dashboard />
-      <AddWordBtn />
-      <TrainOneselfBtn />
+      <div className={css.linksContainer}>
+        <AddWordBtn />
+        <TrainOneselfBtn />
+      </div>
 
       <WordsTable items={items} mode="dictionary" />
 

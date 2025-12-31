@@ -12,6 +12,7 @@ import { selectWordsLoading } from "../../redux/words/selectors";
 import ActionsBtn from "./ActionsBtn/ActionsBtn";
 import EditWordModal from "./EditWordModal/EditWordModal";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import css from "./WordsTable.module.css";
 
 export default function WordsTable({
   items = [],
@@ -39,6 +40,9 @@ export default function WordsTable({
         id: "category",
         header: "Category",
         accessorKey: "category",
+        meta: {
+          className: css.categoryCol,
+        },
       },
     ];
 
@@ -51,7 +55,7 @@ export default function WordsTable({
         },
         {
           id: "actions",
-          header: "Actions",
+          header: "",
           cell: ({ row }) => (
             <ActionsBtn
               onEdit={() => setEditWord(row.original)}
@@ -91,13 +95,18 @@ export default function WordsTable({
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
-      <table>
-        <thead>
+    <div className={css.container}>
+      <table className={css.table}>
+        <thead className={css.thead}>
           {table.getHeaderGroups().map((group) => (
-            <tr key={group.id}>
+            <tr key={group.id} className={css.tr}>
               {group.headers.map((header) => (
-                <th key={header.id}>
+                <th
+                  key={header.id}
+                  className={`${css.th} ${
+                    header.column.columnDef.meta?.className || ""
+                  }`}
+                >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
@@ -108,11 +117,14 @@ export default function WordsTable({
           ))}
         </thead>
 
-        <tbody>
+        <tbody className={css.tbody}>
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  className={`${css.td} ${cell.column.columnDef.meta?.className}`}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

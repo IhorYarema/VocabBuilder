@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Popover from "@mui/material/Popover";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { toast } from "react-toastify";
 
 export default function ActionsBtn({ onEdit, onDelete }) {
@@ -26,7 +26,7 @@ export default function ActionsBtn({ onEdit, onDelete }) {
   return (
     <>
       <button onClick={(e) => setAnchor(e.currentTarget)}>
-        <MoreVertIcon />
+        <MoreHorizIcon />
       </button>
 
       <Popover
