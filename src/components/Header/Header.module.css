@@ -17,6 +17,8 @@
 @media (min-width: 1440px) {
   .header {
     padding: 20px 100px;
+    height: 88px;
+    box-sizing: border-box;
   }
 }
 

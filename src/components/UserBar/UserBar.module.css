@@ -22,7 +22,6 @@
 }
 
 .avatar {
-  /* background-color: rgba(133, 170, 159, 1); */
   background-color: rgba(252, 252, 252, 1);
   width: 36px;
   height: 36px;
@@ -39,6 +38,12 @@
   }
 }
 
+@media (min-width: 1440px) {
+  .avatar {
+    background-color: rgba(133, 170, 159, 1);
+  }
+}
+
 .iconUser {
   color: rgba(133, 170, 159, 1);
 }
@@ -47,5 +52,11 @@
   .iconUser {
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .iconUser {
+    color: rgba(252, 252, 252, 0.7);
   }
 }

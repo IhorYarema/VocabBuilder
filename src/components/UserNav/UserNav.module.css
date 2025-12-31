@@ -5,8 +5,8 @@
 }
 
 .link {
-  display: inline-block;
-  width: auto;
+  /* display: inline-block;
+  width: auto; */
   color: rgba(252, 252, 252, 1);
 }
 
@@ -17,4 +17,24 @@
   color: rgba(18, 20, 23, 1);
   background-color: rgba(252, 252, 252, 1);
   border-radius: 15px;
+}
+
+@media (min-width: 1440px) {
+  .navGroup {
+    flex-direction: row;
+    gap: 28px;
+  }
+
+  .link {
+    color: rgba(18, 20, 23, 1);
+    padding: 12px 20px;
+  }
+
+  .active {
+    display: inline-block;
+    width: auto;
+    color: rgba(252, 252, 252, 1);
+    background-color: rgba(133, 170, 159, 1);
+    border-radius: 15px;
+  }
 }
