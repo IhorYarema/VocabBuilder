@@ -96,6 +96,7 @@ export default function Filters() {
         placeholder="Search..."
         value={query}
         onChange={handleInputChange}
+        className={css.input}
       />
 
       <select value={selectedCategory} onChange={handleCategoryChange}>
@@ -116,6 +117,7 @@ export default function Filters() {
               value="regular"
               checked={verbType === "regular"}
               onChange={handleVerbTypeChange}
+              className={css.input}
             />
             Regular
           </label>

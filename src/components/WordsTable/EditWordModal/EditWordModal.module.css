@@ -6,12 +6,18 @@
   padding: 251px 16px 0 16px;
 }
 
-.modal {
-  position: relative;
-  background-color: rgba(133, 170, 159, 1);
+@media (min-width: 768px) {
+  .backdrop {
+    padding: 380px 70px 0;
+  }
 }
 
-.iconCross {
-  position: absolute;
-  color: rgba(252, 252, 252, 1);
+@media (min-width: 1440px) {
+  .backdrop {
+    padding: 346px 406px 0;
+  }
+}
+
+.modal {
+  background-color: rgba(133, 170, 159, 1);
 }

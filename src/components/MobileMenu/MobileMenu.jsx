@@ -14,7 +14,7 @@ export default function MobileMenu({ open, setOpen }) {
         <div className={css.upperContainer}>
           <UserBar />
           <button className={css.closeBtn}>
-            <Icon className={css.iconClose} name="x" size={32} />
+            <Icon className={css.iconClose} name="x-close" size={32} />
           </button>
         </div>
         <UserNav closeMenu={() => setOpen(false)} />

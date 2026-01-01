@@ -6,7 +6,13 @@ import css from "./EditWordForm.module.css";
 import { editWordSchema } from "../../../../schemas/editWordSchema";
 import Icon from "../../../Icon/Icon";
 
-export default function EditWordForm({ word, onSuccess, onCancel }) {
+export default function EditWordForm({
+  word,
+  onSuccess,
+  onCancel,
+  onClose,
+  className,
+}) {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -49,24 +55,35 @@ export default function EditWordForm({ word, onSuccess, onCancel }) {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
-        <Form className={css.form}>
-          <label>
-            <Icon className={css.iconUa} name="ukraine" size={28} />
-            Ukrainian
-            <Field type="text" name="ua" />
+        <Form className={`${css.form} ${className}`}>
+          <button className={css.closeBtn} onClick={onClose}>
+            <Icon className={css.iconCross} name="x-close" size={24} />
+          </button>
+          <label className={css.label}>
+            <div className={css.labelCont}>
+              <Icon className={css.iconUa} name="ukraine" size={28} />
+              Ukrainian
+            </div>
+            <Field type="text" name="ua" className={css.input} />
           </label>
 
-          <label>
-            <Icon className={css.iconUa} name="unitedkingdom" size={28} />
-            English
-            <Field type="text" name="en" />
+          <label className={css.label}>
+            <div className={css.labelCont}>
+              <Icon className={css.iconUa} name="unitedkingdom" size={28} />
+              English
+            </div>
+            <Field type="text" name="en" className={css.input} />
           </label>
 
           <div className={css.buttons}>
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={css.saveBtn}
+            >
               Save
             </button>
-            <button type="button" onClick={onCancel}>
+            <button type="button" onClick={onCancel} className={css.cancelBtn}>
               Cancel
             </button>
           </div>
