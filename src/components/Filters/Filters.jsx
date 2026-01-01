@@ -2,6 +2,7 @@ import css from "./Filters.module.css";
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "lodash.debounce";
+import Select from "react-select";
 
 import { fetchCategories, fetchWords } from "../../redux/filters/operations";
 
@@ -13,6 +14,8 @@ import {
 } from "../../redux/filters/selectors";
 
 import { setCategory, setVerbType, setQuery } from "../../redux/filters/slice";
+import "./Filter.css";
+import Icon from "../Icon/Icon";
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -41,6 +44,13 @@ export default function Filters() {
     []
   );
 
+  const options = categories.map((c) => ({
+    value: c,
+    label: c.charAt(0).toUpperCase() + c.slice(1),
+  }));
+
+  const selectedOption = options.find((opt) => opt.value === selectedCategory);
+
   // Handle text input
   const handleInputChange = (e) => {
     const value = e.target.value.trimStart();
@@ -62,8 +72,9 @@ export default function Filters() {
   };
 
   // Category change
-  const handleCategoryChange = (e) => {
-    const newCategory = e.target.value;
+  const handleCategoryChange = (option) => {
+    const newCategory = option.value;
+
     dispatch(setCategory(newCategory));
 
     dispatch(
@@ -91,44 +102,62 @@ export default function Filters() {
 
   return (
     <div className={css.filters}>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={query}
-        onChange={handleInputChange}
-        className={css.input}
-      />
+      <div className={css.inputCont}>
+        <input
+          type="text"
+          placeholder="Find the word"
+          value={query}
+          onChange={handleInputChange}
+          className={css.input}
+        />
+        <Icon className={css.iconSearch} name="search" size={20} />
+      </div>
 
-      <select value={selectedCategory} onChange={handleCategoryChange}>
+      {/* <select
+        value={selectedCategory}
+        onChange={handleCategoryChange}
+        className={css.input}
+      >
         <option value="all">All</option>
         {categories.map((c) => (
           <option key={c} value={c}>
             {c}
           </option>
         ))}
-      </select>
+      </select> */}
+
+      <Select
+        unstyled
+        value={selectedOption}
+        onChange={handleCategoryChange}
+        options={options}
+        isSearchable={false}
+        className={css.reactSelectContainer}
+        classNamePrefix="custom"
+      />
 
       {selectedCategory === "verb" && (
         <div className={css.verbOptions}>
-          <label>
+          <label className={css.radioLabel}>
             <input
               type="radio"
               name="verbType"
               value="regular"
               checked={verbType === "regular"}
               onChange={handleVerbTypeChange}
-              className={css.input}
+              className={css.radio}
             />
             Regular
           </label>
 
-          <label>
+          <label className={css.radioLabel}>
             <input
               type="radio"
               name="verbType"
               value="irregular"
               checked={verbType === "irregular"}
               onChange={handleVerbTypeChange}
+              className={css.radio}
             />
             Irregular
           </label>
