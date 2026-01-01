@@ -1,8 +1,18 @@
 import css from "./Statistics.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Statistics() {
-  const dispatch = useDispatch();
+  const words = useSelector((state) => state.words.items);
 
-  return <div className={css.container}></div>;
+  const toStudyCount = words.filter(
+    (word) => (word.progress ?? 0) < 100
+  ).length;
+
+  return (
+    <div className={css.container}>
+      <p className={css.text}>
+        To study:<span className={css.span}>{toStudyCount}</span>
+      </p>
+    </div>
+  );
 }
