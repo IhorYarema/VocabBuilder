@@ -20,4 +20,5 @@
 
 .modal {
   background-color: rgba(133, 170, 159, 1);
+  border-radius: 30px;
 }

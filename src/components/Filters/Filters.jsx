@@ -113,19 +113,6 @@ export default function Filters() {
         <Icon className={css.iconSearch} name="search" size={20} />
       </div>
 
-      {/* <select
-        value={selectedCategory}
-        onChange={handleCategoryChange}
-        className={css.input}
-      >
-        <option value="all">All</option>
-        {categories.map((c) => (
-          <option key={c} value={c}>
-            {c}
-          </option>
-        ))}
-      </select> */}
-
       <Select
         unstyled
         value={selectedOption}

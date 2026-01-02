@@ -19,11 +19,6 @@ export default function AddWordModal({ open, onClose }) {
   return (
     <div className={css.backdrop} onClick={closeByBackdrop}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={css.closeBtn} onClick={onClose}>
-          ✕
-        </button>
-        <h2 className={css.title}>Add new word</h2>
-
         <AddWordForm onSuccess={onClose} onCancel={onClose} />
       </div>
     </div>

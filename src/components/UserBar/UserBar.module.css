@@ -18,6 +18,10 @@
 }
 
 .name {
+  color: rgba(18, 20, 23, 1);
+}
+
+aside .name {
   color: rgba(252, 252, 252, 1);
 }
 
