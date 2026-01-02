@@ -9,6 +9,7 @@ import {
 } from "../../redux/recommend/operations";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import TrainOneselfBtn from "../../components/TrainOneselfBtn/TrainOneselfBtn";
 
 export default function RecommendPage() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ export default function RecommendPage() {
   return (
     <section className={css.section}>
       <Dashboard />
+      <TrainOneselfBtn />
       <WordsTable
         items={items}
         mode="recommend"

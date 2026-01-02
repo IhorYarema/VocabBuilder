@@ -121,6 +121,7 @@ export default function Filters() {
         isSearchable={false}
         className={css.reactSelectContainer}
         classNamePrefix="custom"
+        placeholder="Categories"
       />
 
       {selectedCategory === "verb" && (

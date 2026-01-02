@@ -6,3 +6,15 @@
   display: flex;
   gap: 16px;
 }
+
+@media (min-width: 768px) {
+  .section {
+    padding: 80px 32px 48px 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    padding: 80px 100px 108px 100px;
+  }
+}
